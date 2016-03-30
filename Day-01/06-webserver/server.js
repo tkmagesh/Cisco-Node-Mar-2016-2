@@ -5,6 +5,13 @@ var http = require('http'),
 	url = require('url'),
 	calculator = require('./calculator');
 
+/*
+	dataParser
+	serveStatic
+	calculatorRequestHandler
+	notFoundHandler
+*/	
+
 var staticExtns = ['.html', '.js', '.png', '.ico', '.json', '.xml'];
 function isStatic(resource){
 	return staticExtns.indexOf(path.extname(resource)) !== -1;
