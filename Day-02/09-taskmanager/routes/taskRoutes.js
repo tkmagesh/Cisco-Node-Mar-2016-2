@@ -20,7 +20,7 @@ router.get('/new', function(req, res, next){
 router.post('/new', function(req, res, next){
 	var newTaskName = req.body.taskName;
 	var newId = tasks.reduce(function(result, task){
-		return result > task.id ? task.id : result;
+		return result > task.id ? result : task.id;
 	}, 0) + 1;
 	var newTask = {
 		id : newId,
