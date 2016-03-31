@@ -2,6 +2,7 @@ var querystring = require('querystring'),
 	calculator = require('./calculator');
 
 module.exports = function(req, res){
+	console.log('log from calculatorReqHandler');
 	if (req.url.pathname === '/calculator' && req.method === 'GET'){
 		var input = querystring.parse(req.url.query);
 		var n1 = parseInt(input.n1, 10),

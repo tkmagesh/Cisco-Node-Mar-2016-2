@@ -7,6 +7,7 @@ function isStatic(resource){
 }
 
 module.exports = function(req, res){
+	console.log('log from serveStatic');
 	var resource = path.join(__dirname, req.url.pathname);
 	if (isStatic(resource)){
 		if (!fs.existsSync(resource)){
@@ -14,7 +15,24 @@ module.exports = function(req, res){
 			res.end();
 			return;
 		}
+		
+		//Async
 		var stream = fs.createReadStream(resource);
-		stream.pipe(res);
+		//stream.pipe(res);
+		stream.on('data', function(chunk){
+			console.log('writing file chunk to response object');
+			res.write(chunk);
+		});
+
+		stream.on('end', function(){
+			console.log('finished writing file chunk to response object');
+			res.end();
+		});
+
+		//Sync
+		/*var fileContents = fs.readFileSync(resource, {encoding : 'utf8'});
+		res.write(fileContents);
+		console.log('finished writing file response object');
+		res.end();*/
 	} 
 }
